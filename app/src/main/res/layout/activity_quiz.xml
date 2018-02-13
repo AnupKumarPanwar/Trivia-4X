@@ -6,6 +6,11 @@
     tools:context="com.quiz.triviahd.QuizActivity"
     android:background="@drawable/login">
 
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"/>
+
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="360dp"
@@ -42,51 +47,207 @@
 
 
         <TextView
+            android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:text="What is 10 +10?"
             android:gravity="center"
             android:textSize="25dp"
             android:textColor="#000"
             android:textStyle="bold"
             android:layout_marginBottom="50dp"/>
-        
-        <Button
-            android:layout_width="250dp"
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="20"
-            android:textSize="18dp"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:gravity="left"
+                android:padding="20dp"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_button"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/op1"/>
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:gravity="left"
+                android:padding="20dp"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_button"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/a_op1"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:gravity="left"
+                android:padding="20dp"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_button"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/op2"/>
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:gravity="left"
+                android:padding="20dp"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_button"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/a_op2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:gravity="left"
+                android:padding="20dp"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_button"
+                android:id="@+id/op3"/>
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:gravity="left"
+                android:padding="20dp"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_button"
+                android:id="@+id/a_op3"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ans_container"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/transparent_card_view"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:weightSum="7"
+        >
+
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:gravity="left"
             android:padding="20dp"
             android:textAllCaps="false"
-            android:background="@drawable/rounded_button"
             android:layout_marginBottom="10dp"
-            android:id="@+id/op1"/>
-        <Button
-            android:layout_width="250dp"
+            android:textColor="#fff"
+            android:id="@+id/ans_op1"/>
+
+
+        <TextView
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="20"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:gravity="left"
             android:padding="20dp"
             android:textAllCaps="false"
-            android:background="@drawable/rounded_button"
             android:layout_marginBottom="10dp"
-            android:id="@+id/op2"/>
-        <Button
-            android:layout_width="250dp"
+            android:textColor="#fff"
+            android:id="@+id/ans_op2"/>
+
+        <TextView
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="20"
-            android:textSize="18dp"
+            android:text="20333"
+            android:textSize="15dp"
             android:gravity="left"
             android:padding="20dp"
             android:textAllCaps="false"
-            android:background="@drawable/rounded_button"
-            android:id="@+id/op3"/>
+            android:textColor="#fff"
+            android:id="@+id/ans_op3"/>
+
+    </LinearLayout>
 
 
 
+    <LinearLayout
+        android:id="@+id/ch_container"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/transparent_card_view"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:weightSum="7"
+        >
+
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:gravity="right"
+            android:padding="20dp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="10dp"
+            android:textColor="#fff"
+            android:id="@+id/ch1"/>
+
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textSize="12dp"
+            android:gravity="right"
+            android:padding="20dp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="10dp"
+            android:textColor="#fff"
+            android:id="@+id/ch2"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="20333"
+            android:textSize="12dp"
+            android:gravity="right"
+            android:padding="20dp"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:id="@+id/ch3"/>
 
     </LinearLayout>
 
