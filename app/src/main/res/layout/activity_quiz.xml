@@ -221,7 +221,7 @@
             android:gravity="right"
             android:padding="20dp"
             android:textAllCaps="false"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             android:textColor="#fff"
             android:id="@+id/ch1"/>
 
@@ -234,7 +234,7 @@
             android:gravity="right"
             android:padding="20dp"
             android:textAllCaps="false"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="16dp"
             android:textColor="#fff"
             android:id="@+id/ch2"/>
 

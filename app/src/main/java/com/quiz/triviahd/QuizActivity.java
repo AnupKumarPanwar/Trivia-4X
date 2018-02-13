@@ -167,7 +167,7 @@ public class QuizActivity extends AppCompatActivity {
                     progressBar.setProgress(100 - progressNum);
                     countDown.setText(String.valueOf((100 - progressNum) / 10));
                     progressNum += 10;
-                    handler.postDelayed(this, 100);
+                    handler.postDelayed(this, 1000);
                 }
                 else
                 {
@@ -176,7 +176,7 @@ public class QuizActivity extends AppCompatActivity {
                             .setInterpolator(new AccelerateInterpolator())
                             .setDuration(250);
 
-                    handler.postDelayed(showAnsRunnable, 500);
+                    handler.postDelayed(showAnsRunnable, 5000);
                 }
             }
         };
@@ -273,9 +273,9 @@ public class QuizActivity extends AppCompatActivity {
         ans2.setText(q_q.op2);
         ans3.setText(q_q.op3);
 
-        ch1.setText(q_q.ch1);
-        ch2.setText(q_q.ch2);
-        ch3.setText(q_q.ch3);
+        ch1.setText(String.valueOf(q_q.ch1));
+        ch2.setText(String.valueOf(q_q.ch2));
+        ch3.setText(String.valueOf(q_q.ch3));
 
         ansContainer.setVisibility(View.GONE);
 
