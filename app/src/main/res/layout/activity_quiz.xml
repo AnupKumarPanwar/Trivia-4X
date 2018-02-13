@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.quiz.triviahd.QuizActivity"
+    android:background="@drawable/login">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/card_view"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:weightSum="7"
+        >
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="10"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/count_down"/>
+
+        <com.anthonycr.progress.AnimatedProgressBar
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/progress_view"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#424242"
+            custom:bidirectionalAnimate="true"
+            custom:progressColor="#e5296d"
+            android:layout_marginBottom="20dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="What is 10 +10?"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginBottom="50dp"/>
+        
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textSize="18dp"
+            android:gravity="left"
+            android:padding="20dp"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_button"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/op1"/>
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textSize="18dp"
+            android:gravity="left"
+            android:padding="20dp"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_button"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/op2"/>
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textSize="18dp"
+            android:gravity="left"
+            android:padding="20dp"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_button"
+            android:id="@+id/op3"/>
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
