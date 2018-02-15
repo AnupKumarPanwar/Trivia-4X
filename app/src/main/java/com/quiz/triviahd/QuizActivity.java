@@ -32,7 +32,7 @@ import okhttp3.Response;
 
 public class QuizActivity extends AppCompatActivity {
 
-    Runnable runnable, showAnsRunnable;
+    Runnable runnable, showAnsRunnable, hideContainerRunnable, nextQuestionRunnable;
     AnimatedProgressBar progressBar;
     Handler handler;
 
@@ -57,6 +57,10 @@ public class QuizActivity extends AppCompatActivity {
 
     Button ur_button;
 
+    int score=0;
+
+    boolean isEliminated=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class QuizActivity extends AppCompatActivity {
         chContainer.setVisibility(View.GONE);
 
         containerY=container.getY();
+        container.setY(container.getHeight());
         question_no=0;
 
         progressBar = (AnimatedProgressBar) findViewById(R.id.progress_view);
@@ -176,7 +181,7 @@ public class QuizActivity extends AppCompatActivity {
                             .setInterpolator(new AccelerateInterpolator())
                             .setDuration(250);
 
-                    handler.postDelayed(showAnsRunnable, 5000);
+                    handler.postDelayed(showAnsRunnable, 7000);
                 }
             }
         };
@@ -187,6 +192,25 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void run() {
                 showAnswer(question_no);
+            }
+        };
+
+
+        hideContainerRunnable=new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void run() {
+                hideContainer();
+            }
+        };
+
+        nextQuestionRunnable=new Runnable() {
+            @Override
+            public void run() {
+                if (question_no<questionList.size()-1) {
+                    question_no++;
+                    updateQuestion(question_no);
+                }
             }
         };
 
@@ -256,8 +280,12 @@ public class QuizActivity extends AppCompatActivity {
         container.setVisibility(View.VISIBLE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     void updateQuestion(int i)
     {
+        isAnswered=false;
+        progressNum=0;
+        user_response=-1;
         a_op1.setVisibility(View.GONE);
         a_op2.setVisibility(View.GONE);
         a_op3.setVisibility(View.GONE);
@@ -269,6 +297,14 @@ public class QuizActivity extends AppCompatActivity {
         op2.setText(q_q.op2);
         op3.setText(q_q.op3);
 
+        op1.setBackground(getDrawable(R.drawable.rounded_button));
+        op2.setBackground(getDrawable(R.drawable.rounded_button));
+        op3.setBackground(getDrawable(R.drawable.rounded_button));
+
+        op1.setTextColor(Color.parseColor("#131313"));
+        op2.setTextColor(Color.parseColor("#131313"));
+        op3.setTextColor(Color.parseColor("#131313"));
+
         ans1.setText(q_q.op1);
         ans2.setText(q_q.op2);
         ans3.setText(q_q.op3);
@@ -278,8 +314,13 @@ public class QuizActivity extends AppCompatActivity {
         ch3.setText(String.valueOf(q_q.ch3));
 
         ansContainer.setVisibility(View.GONE);
+        chContainer.setVisibility(View.GONE);
 
-        handler.postDelayed(runnable, 1000);
+        handler.postDelayed(runnable, 1250);
+
+        if (question_no>=0) {
+            showContainer();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -355,12 +396,50 @@ public class QuizActivity extends AppCompatActivity {
 
         if (q_a.ans!=user_response)
         {
+            isEliminated=true;
             if (ur_button!=null) {
                 ur_button.setBackground(getDrawable(R.drawable.red_button));
             }
         }
+        else {
+            score++;
+        }
 
 
+        container.animate()
+                .translationY(containerY)
+                .setInterpolator(new AccelerateInterpolator())
+                .setDuration(250);
+
+        handler.postDelayed(hideContainerRunnable, 5000);
+
+    }
+
+    void hideContainer()
+    {
+        container.animate()
+                .translationY(container.getHeight())
+                .setInterpolator(new AccelerateInterpolator())
+                .setDuration(250);
+
+//        ansContainer.animate()
+//                .translationY(container.getHeight())
+//                .setInterpolator(new AccelerateInterpolator())
+//                .setDuration(250);
+//
+//        chContainer.animate()
+//                .translationY(container.getHeight())
+//                .setInterpolator(new AccelerateInterpolator())
+//                .setDuration(250);
+
+        ansContainer.setVisibility(View.GONE);
+        chContainer.setVisibility(View.GONE);
+
+        handler.postDelayed(nextQuestionRunnable, 5000);
+    }
+
+    void showContainer()
+    {
         container.animate()
                 .translationY(containerY)
                 .setInterpolator(new AccelerateInterpolator())
