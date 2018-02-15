@@ -52,7 +52,7 @@ public class QuizActivity extends AppCompatActivity {
 
     int question_no;
 
-    float scale;
+    float scale
 
     int user_response;
 
