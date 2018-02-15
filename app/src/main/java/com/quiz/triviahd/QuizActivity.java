@@ -1,5 +1,6 @@
 package com.quiz.triviahd;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -39,7 +40,7 @@ public class QuizActivity extends AppCompatActivity {
     Button op1, op2, op3, a_op1, a_op2, a_op3 ;
     int progressNum=10;
 
-    TextView countDown, question, ans1, ans2, ans3, ch1, ch2, ch3;
+    TextView countDown, question, ans1, ans2, ans3, ch1, ch2, ch3, warningMsg;
 
     LinearLayout container, ansContainer, chContainer;
 
@@ -61,6 +62,8 @@ public class QuizActivity extends AppCompatActivity {
 
     boolean isEliminated=false;
 
+    RelativeLayout warningContainer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +80,12 @@ public class QuizActivity extends AppCompatActivity {
         container=(LinearLayout)findViewById(R.id.container);
         ansContainer=(LinearLayout)findViewById(R.id.ans_container);
         chContainer=(LinearLayout)findViewById(R.id.ch_container);
+        warningContainer=(RelativeLayout)findViewById(R.id.warning_container);
+
 
         ansContainer.setVisibility(View.GONE);
         chContainer.setVisibility(View.GONE);
+        warningContainer.setVisibility(View.GONE);
 
         containerY=container.getY();
         container.setY(container.getHeight());
@@ -88,6 +94,7 @@ public class QuizActivity extends AppCompatActivity {
         progressBar = (AnimatedProgressBar) findViewById(R.id.progress_view);
         progressBar.setProgress(100);
 
+        warningMsg=(TextView)findViewById(R.id.warning_msg);
         countDown=(TextView)findViewById(R.id.count_down);
         question=(TextView)findViewById(R.id.question);
 
@@ -122,7 +129,7 @@ public class QuizActivity extends AppCompatActivity {
         op1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (! isAnswered) {
+                if (! isAnswered && !isEliminated) {
                     op1.setBackground(getDrawable(R.drawable.blue_button));
                     op1.setTextColor(Color.WHITE);
                     isAnswered=true;
@@ -136,7 +143,7 @@ public class QuizActivity extends AppCompatActivity {
         op2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (! isAnswered) {
+                if (! isAnswered && !isEliminated) {
                     op2.setBackground(getDrawable(R.drawable.blue_button));
                     op2.setTextColor(Color.WHITE);
                     isAnswered=true;
@@ -151,7 +158,7 @@ public class QuizActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View view) {
-                if(! isAnswered) {
+                if(! isAnswered && !isEliminated) {
                     op3.setBackground(getDrawable(R.drawable.blue_button));
                     op3.setTextColor(Color.WHITE);
                     isAnswered=true;
@@ -270,7 +277,13 @@ public class QuizActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Boolean result) {
-            startQuiz();
+            if (questionList.size()>0) {
+                startQuiz();
+            }
+            else {
+                warningMsg.setText("Unable to connect!");
+                warningContainer.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -397,6 +410,8 @@ public class QuizActivity extends AppCompatActivity {
         if (q_a.ans!=user_response)
         {
             isEliminated=true;
+            warningMsg.setText("You are eliminated!");
+            warningContainer.setVisibility(View.VISIBLE);
             if (ur_button!=null) {
                 ur_button.setBackground(getDrawable(R.drawable.red_button));
             }

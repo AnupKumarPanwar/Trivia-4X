@@ -6,6 +6,26 @@
     tools:context="com.quiz.triviahd.QuizActivity"
     android:background="@drawable/login">
 
+    <RelativeLayout
+        android:layout_width="360dp"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/card_view"
+        android:layout_marginTop="-15dp"
+        android:paddingTop="10dp"
+        android:id="@+id/warning_container">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You Are Eliminated !"
+            android:gravity="center"
+            android:textColor="#ff0000"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:id="@+id/warning_msg"/>
+    </RelativeLayout>
+
     <ProgressBar
         android:layout_width="50dp"
         android:layout_height="50dp"
