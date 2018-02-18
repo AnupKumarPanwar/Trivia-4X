@@ -17,20 +17,23 @@ import org.json.JSONObject;
 
 import java.sql.Time;
 
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HomeScreen extends AppCompatActivity {
 
-    Button playButton, invite, gml;
+    Button playButton, invite, gml, leaderboard;
 
     TextView nextGame, gameReward, usernameHolder, balanceHOlder, livesHolder;
 
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     String referral_code;
-    JSONObject jsonObject;
+    JSONObject jsonObject, jsonObject2;
 
     int hours, minutes;
 
@@ -46,7 +49,9 @@ public class HomeScreen extends AppCompatActivity {
 
 
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
-        referral_code=sharedPreferences.getString("referral_code","");
+        editor=sharedPreferences.edit();
+
+        referral_code=sharedPreferences.getString("username",null);
         username=sharedPreferences.getString("username",null);
 
         nextGame=(TextView)findViewById(R.id.tv2);
@@ -60,6 +65,7 @@ public class HomeScreen extends AppCompatActivity {
         playButton=(Button)findViewById(R.id.play_button);
         gml=(Button)findViewById(R.id.gml);
         invite=(Button)findViewById(R.id.invite);
+        leaderboard=(Button)findViewById(R.id.leaderboard);
 
 
 
@@ -131,6 +137,15 @@ public class HomeScreen extends AppCompatActivity {
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "No App Available", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+
+        leaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), LeaderboardActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -237,8 +252,15 @@ public class HomeScreen extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(String... strings) {
             OkHttpClient client = new OkHttpClient();
+
+            RequestBody requestBody=new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("username", username)
+                    .build();
+
             Request request = new Request.Builder()
                     .url(baseUrl+"getBal.php")
+                    .post(requestBody)
                     .build();
 
 
@@ -248,7 +270,7 @@ public class HomeScreen extends AppCompatActivity {
                 response = client.newCall(request).execute();
                 String jsonString=response.body().string();
 
-                jsonObject=new JSONObject(jsonString);
+                jsonObject2=new JSONObject(jsonString);
 
 
             }
@@ -263,11 +285,14 @@ public class HomeScreen extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             try {
 
-                if (jsonObject.getJSONObject("result").getString("status").equals("1"))
+                if (jsonObject2.getJSONObject("result").getString("status").equals("1"))
                 {
 //                    playButton.setVisibility(View.VISIBLE);
-                    balanceHOlder.setText(jsonObject.getJSONObject("result").getString("balance"));
-                    livesHolder.setText(jsonObject.getJSONObject("result").getString("lives"));
+                    balanceHOlder.setText("₹ "+jsonObject2.getJSONObject("result").getString("balance"));
+                    livesHolder.setText(jsonObject2.getJSONObject("result").getString("lives"));
+
+                    editor.putString("lifes",jsonObject2.getJSONObject("result").getString("lives") );
+                    editor.apply();
                 }
 
             } catch (Exception e) {
@@ -277,4 +302,8 @@ public class HomeScreen extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

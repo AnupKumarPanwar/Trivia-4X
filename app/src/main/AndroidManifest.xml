@@ -25,7 +25,8 @@
         <activity android:name=".HomeScreen" />
         <activity android:name=".QuizActivity" />
         <activity android:name=".ScoreCard" />
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".LeaderboardActivity"></activity>
     </application>
 
 </manifest>

@@ -141,7 +141,7 @@ public class CreateProfile extends AppCompatActivity {
         conti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                phoneNo=phoneText.getText().toString();
+                phoneNo="+91"+phoneText.getText().toString();
                 if (!TextUtils.isEmpty(phoneNo)) {
 //                Toast.makeText(getApplicationContext(), phoneNo, Toast.LENGTH_SHORT).show();
                     sendOTP(phoneNo);
@@ -156,7 +156,7 @@ public class CreateProfile extends AppCompatActivity {
     void sendOTP(String num)
     {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+91"+num,        // Phone number to verify
+                num,        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
@@ -178,7 +178,7 @@ public class CreateProfile extends AppCompatActivity {
 //                            Intent intent=new Intent(getApplicationContext(), HomeScreen.class);
 //                            startActivity(intent);
 //                            finish();
-                            editor.putString("phone", "+91"+phoneNo);
+                            editor.putString("phone", phoneNo);
                             editor.apply();
                             JSONAsyncTask getData = new JSONAsyncTask();
                             getData.execute();
@@ -213,7 +213,7 @@ public class CreateProfile extends AppCompatActivity {
 
             RequestBody requestBody=new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
-                    .addFormDataPart("phone", "+91"+phoneNo)
+                    .addFormDataPart("phone", phoneNo)
                     .build();
 
             Request request = new Request.Builder()

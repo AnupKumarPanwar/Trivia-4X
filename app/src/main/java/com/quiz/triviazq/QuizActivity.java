@@ -27,8 +27,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class QuizActivity extends AppCompatActivity {
@@ -70,6 +72,12 @@ public class QuizActivity extends AppCompatActivity {
 
     SharedPreferences.Editor editor;
 
+    String baseUrl="http://192.168.4.145/HQ/";
+
+    JSONObject jsonObject, jsonObject2;
+
+    String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +90,9 @@ public class QuizActivity extends AppCompatActivity {
 
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=sharedPreferences.edit();
+
+        username=sharedPreferences.getString("username", null);
+
         lifes=Integer.parseInt(sharedPreferences.getString("lifes","0"));
 
         scale=getApplicationContext().getResources().getDisplayMetrics().density;
@@ -189,7 +200,7 @@ public class QuizActivity extends AppCompatActivity {
                     progressBar.setProgress(100 - progressNum);
                     countDown.setText(String.valueOf((100 - progressNum) / 10));
                     progressNum += 10;
-                    handler.postDelayed(this, 1000);
+                    handler.postDelayed(this, 100);
                 }
                 else
                 {
@@ -198,7 +209,7 @@ public class QuizActivity extends AppCompatActivity {
                             .setInterpolator(new AccelerateInterpolator())
                             .setDuration(250);
 
-                    handler.postDelayed(showAnsRunnable, 7000);
+                    handler.postDelayed(showAnsRunnable, 700);
                 }
             }
         };
@@ -230,6 +241,11 @@ public class QuizActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    if (score==10) {
+                        JSONAsyncTask3 getData = new JSONAsyncTask3();
+                        getData.execute();
+                    }
+
                     Intent intent=new Intent(getApplicationContext(), ScoreCard.class);
                     intent.putExtra("score", score);
                     intent.putExtra("reward", reward);
@@ -318,6 +334,7 @@ public class QuizActivity extends AppCompatActivity {
         isAnswered=false;
         progressNum=0;
         user_response=-1;
+        ur_button=null;
         a_op1.setVisibility(View.GONE);
         a_op2.setVisibility(View.GONE);
         a_op3.setVisibility(View.GONE);
@@ -348,7 +365,7 @@ public class QuizActivity extends AppCompatActivity {
         ansContainer.setVisibility(View.GONE);
         chContainer.setVisibility(View.GONE);
 
-        handler.postDelayed(runnable, 1250);
+        handler.postDelayed(runnable, 125);
 
         if (question_no>=0) {
             showContainer();
@@ -441,7 +458,11 @@ public class QuizActivity extends AppCompatActivity {
                     lifes--;
                     lifeUsed = true;
                     editor.putString("lifes", String.valueOf(lifes));
-                    editor.apply();
+
+                    JSONAsyncTask2 getData2 = new JSONAsyncTask2();
+                    getData2.execute();
+
+
                     Toast.makeText(getApplicationContext(), "1 life used", Toast.LENGTH_SHORT).show();
                     if (ur_button != null) {
                         ur_button.setBackground(getDrawable(R.drawable.red_button));
@@ -467,7 +488,7 @@ public class QuizActivity extends AppCompatActivity {
                 .setInterpolator(new AccelerateInterpolator())
                 .setDuration(250);
 
-        handler.postDelayed(hideContainerRunnable, 5000);
+        handler.postDelayed(hideContainerRunnable, 500);
 
     }
 
@@ -491,7 +512,7 @@ public class QuizActivity extends AppCompatActivity {
         ansContainer.setVisibility(View.GONE);
         chContainer.setVisibility(View.GONE);
 
-        handler.postDelayed(nextQuestionRunnable, 5000);
+        handler.postDelayed(nextQuestionRunnable, 500);
     }
 
     void showContainer()
@@ -507,4 +528,101 @@ public class QuizActivity extends AppCompatActivity {
         finish();
         super.onPause();
     }
+
+
+
+    class JSONAsyncTask2 extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody requestBody=new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("username", username)
+                    .build();
+
+            Request request = new Request.Builder()
+                    .url(baseUrl+"updateLives.php")
+                    .build();
+
+
+
+            try {
+                Response response;
+                response = client.newCall(request).execute();
+                String jsonString=response.body().string();
+
+                jsonObject=new JSONObject(jsonString);
+
+
+            }
+            catch (Exception E)
+            {
+//                    Toast.makeText(getApplicationContext(), E.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            return true;
+        }
+
+        protected void onPostExecute(Boolean result) {
+
+        }
+    }
+
+
+    class JSONAsyncTask3 extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody requestBody=new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("username", username)
+                    .addFormDataPart("amount", String.valueOf(reward))
+                    .build();
+
+
+            Request request = new Request.Builder()
+                    .url(baseUrl+"updateBalance.php")
+                    .post(requestBody)
+                    .build();
+
+
+
+            try {
+                Response response;
+                response = client.newCall(request).execute();
+                String jsonString=response.body().string();
+
+                jsonObject2=new JSONObject(jsonString);
+
+
+            }
+            catch (Exception E)
+            {
+//                    Toast.makeText(getApplicationContext(), E.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            return true;
+        }
+
+        protected void onPostExecute(Boolean result) {
+
+        }
+    }
+
 }
