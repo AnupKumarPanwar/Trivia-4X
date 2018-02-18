@@ -1,4 +1,4 @@
-package com.quiz.triviahd;
+package com.quiz.triviazq;
 
 import org.junit.Test;
 

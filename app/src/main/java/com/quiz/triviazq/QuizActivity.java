@@ -1,23 +1,23 @@
-package com.quiz.triviahd;
+package com.quiz.triviazq;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anthonycr.progress.AnimatedProgressBar;
 
@@ -58,11 +58,17 @@ public class QuizActivity extends AppCompatActivity {
 
     Button ur_button;
 
-    int score=0;
+    int score=0, reward=0, lifes;
 
     boolean isEliminated=false;
 
+    boolean lifeUsed=false;
+
+    SharedPreferences sharedPreferences;
+
     RelativeLayout warningContainer;
+
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -73,6 +79,10 @@ public class QuizActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy threadPolicy=new StrictMode.ThreadPolicy.Builder().build();
         StrictMode.setThreadPolicy(threadPolicy);
+
+        sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        editor=sharedPreferences.edit();
+        lifes=Integer.parseInt(sharedPreferences.getString("lifes","0"));
 
         scale=getApplicationContext().getResources().getDisplayMetrics().density;
 
@@ -218,6 +228,14 @@ public class QuizActivity extends AppCompatActivity {
                     question_no++;
                     updateQuestion(question_no);
                 }
+                else
+                {
+                    Intent intent=new Intent(getApplicationContext(), ScoreCard.class);
+                    intent.putExtra("score", score);
+                    intent.putExtra("reward", reward);
+                    startActivity(intent);
+                    finish();
+                }
             }
         };
 
@@ -251,6 +269,7 @@ public class QuizActivity extends AppCompatActivity {
                 String jsonString=response.body().string();
 
                 JSONObject jsonObject=new JSONObject(jsonString);
+                reward=jsonObject.getInt("reward");
                 JSONArray jsonArray=jsonObject.getJSONArray("data");
 
 
@@ -409,11 +428,33 @@ public class QuizActivity extends AppCompatActivity {
 
         if (q_a.ans!=user_response)
         {
-            isEliminated=true;
-            warningMsg.setText("You are eliminated!");
-            warningContainer.setVisibility(View.VISIBLE);
-            if (ur_button!=null) {
-                ur_button.setBackground(getDrawable(R.drawable.red_button));
+            if (lifes==0) {
+                isEliminated = true;
+                warningMsg.setText("You are eliminated!");
+                warningContainer.setVisibility(View.VISIBLE);
+                if (ur_button != null) {
+                    ur_button.setBackground(getDrawable(R.drawable.red_button));
+                }
+            }
+            else {
+                if (!lifeUsed && question_no!=9) {
+                    lifes--;
+                    lifeUsed = true;
+                    editor.putString("lifes", String.valueOf(lifes));
+                    editor.apply();
+                    Toast.makeText(getApplicationContext(), "1 life used", Toast.LENGTH_SHORT).show();
+                    if (ur_button != null) {
+                        ur_button.setBackground(getDrawable(R.drawable.red_button));
+                    }
+                }
+                else {
+                    isEliminated = true;
+                    warningMsg.setText("You are eliminated!");
+                    warningContainer.setVisibility(View.VISIBLE);
+                    if (ur_button != null) {
+                        ur_button.setBackground(getDrawable(R.drawable.red_button));
+                    }
+                }
             }
         }
         else {
@@ -459,5 +500,11 @@ public class QuizActivity extends AppCompatActivity {
                 .translationY(containerY)
                 .setInterpolator(new AccelerateInterpolator())
                 .setDuration(250);
+    }
+
+    @Override
+    protected void onPause() {
+        finish();
+        super.onPause();
     }
 }

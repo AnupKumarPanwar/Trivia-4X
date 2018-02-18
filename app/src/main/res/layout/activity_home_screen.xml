@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.quiz.triviahd.HomeScreen"
+    tools:context="com.quiz.triviazq.HomeScreen"
     android:background="@drawable/login"
     android:gravity="center">
 
@@ -26,7 +26,7 @@
         android:layout_below="@id/tv1"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:text="Tonight, 10:30 PM"/>
+        android:text=""/>
 
     <TextView
         android:id="@+id/tv3"
@@ -36,7 +36,7 @@
         android:gravity="center"
         android:layout_below="@id/tv2"
         android:textSize="20dp"
-        android:text="Rs.10000 prize"
+        android:text=""
         android:textStyle="bold"/>
 
     <Button
@@ -90,6 +90,7 @@
                     app:civ_border_color="#FF000000" />
 
                 <TextView
+                    android:id="@+id/username_holder"
                     android:text="AnupKumarPanwar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -123,9 +124,10 @@
                         android:text="BALANCE"/>
 
                     <TextView
+                        android:id="@+id/balance_holder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rs. 1000"
+                        android:text="₹ ___"
                         android:textColor="#353999"
                         android:textSize="20dp"
                         android:textStyle="bold"/>
@@ -141,12 +143,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="WEEKLY RANK"/>
+                        android:text="LIVES"/>
 
                     <TextView
+                        android:id="@+id/lives_holder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="____"
+                        android:text="__"
                         android:textColor="#353999"
                         android:textSize="20dp"
                         android:textStyle="bold"/>
@@ -161,29 +164,30 @@
                 android:layout_marginTop="20dp"
                 android:layout_weight="2"
                 android:padding="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="EXTRA LIVES"
-                    android:layout_weight="2"
-                    android:gravity="center"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="EXTRA LIVES"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:gravity="center"/>-->
 
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/heart"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:text="5"
-                    android:textColor="#fff"
-                    android:textStyle="bold"/>
+                <!--<TextView-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:background="@drawable/heart"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="5"-->
+                    <!--android:textColor="#fff"-->
+                    <!--android:textStyle="bold"/>-->
 
                 <Button
+                    android:id="@+id/gml"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="Get More"
+                    android:text="Get More Lives"
                     android:background="@drawable/rounded_button"/>
             </LinearLayout>
 
@@ -211,6 +215,7 @@
             android:textColor="#fff"/>
 
         <Button
+            android:id="@+id/invite"
             android:layout_width="145dp"
             android:layout_height="wrap_content"
             android:text="Invite"

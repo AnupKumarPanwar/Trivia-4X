@@ -1,10 +1,11 @@
-package com.quiz.triviahd;
+package com.quiz.triviazq;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +13,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     Button getStarted;
+    private FirebaseAuth mAuth;
+
+    SharedPreferences sharedPreferences;
+    String username;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
 // finally change the color
         window.setStatusBarColor(Color.parseColor("#36399a"));
 
+        sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        username=sharedPreferences.getString("username", null);
+
         getStarted=(Button)findViewById(R.id.get_started);
 
         getStarted.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +53,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        mAuth = FirebaseAuth.getInstance();
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser!=null && username!=null)
+        {
+            Intent intent=new Intent(getApplicationContext(), HomeScreen.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
 }
