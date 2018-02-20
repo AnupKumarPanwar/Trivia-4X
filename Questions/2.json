@@ -1,0 +1,115 @@
+{
+  "reward": "24",
+  "data": [
+    {
+      "id": 1,
+      "q": "Which country to host global World Environment Day (WED-2018) celebrations?",
+      "op1": "India",
+      "op2": "South Africa",
+      "op3": "Brazil",
+      "ans": 1,
+      "ch1": 10014,
+      "ch2": 1295,
+      "ch3": 3035
+    },
+    {
+      "id": 2,
+      "q": "Which state to have India’s first artificial intelligence centre?",
+      "op1": "Kerala",
+      "op2": "Tamil Nadu",
+      "op3": "Maharashtra",
+      "ans": 3,
+      "ch1": 1135,
+      "ch2": 1022,
+      "ch3": 8024
+    },
+    {
+      "id": 3,
+      "q": "Which day is observed on 24 March?",
+      "op1": "World TB Day",
+      "op2": "World Diabetes Day",
+      "op3": "World Cancer Day",
+      "ans": 1,
+      "ch1": 6584,
+      "ch2": 115,
+      "ch3": 2171
+    },
+    {
+      "id": 4,
+      "q": "The most potent greenhouse gas among the following is __?",
+      "op1": "Carbon dioxide",
+      "op2": "Methane",
+      "op3": "Water Vapour",
+      "ans": 3,
+      "ch1": 3541,
+      "ch2": 2575,
+      "ch3": 1277
+    },
+    {
+      "id": 5,
+      "q": "Hopman cup is related to which sports?",
+      "op1": "Football",
+      "op2": "Badminton",
+      "op3": "Lawn Tennis",
+      "ans": 3,
+      "ch1": 365,
+      "ch2": 154,
+      "ch3": 3542
+    },
+    {
+      "id": 6,
+      "q": "Amalgam’ is a term used for an alloy of a metal with :",
+      "op1": "Mercury",
+      "op2": "Copper",
+      "op3": "Aluminium",
+      "ans": 1,
+      "ch1": 2654,
+      "ch2": 184,
+      "ch3": 984
+    },
+    {
+      "id": 7,
+      "q": "Who wrote Mahabharata while Vyasa was dictating?",
+      "op1": "Narad",
+      "op2": "Ganesh",
+      "op3": "Krishna",
+      "ans": 2,
+      "ch1": 241,
+      "ch2": 1824,
+      "ch3": 116
+    },
+    {
+      "id": 8,
+      "q": "Which city hosted the first-ever International Kala Mela?",
+      "op1": "Jaipur",
+      "op2": "Surat",
+      "op3": "New Delhi",
+      "ans": 3,
+      "ch1": 422,
+      "ch2": 395,
+      "ch3": 1025
+    },
+    {
+      "id": 9,
+      "q": "Who is the current Chief Justice of India?",
+      "op1": "T. S. Thakur",
+      "op2": "JS Khehar",
+      "op3": "Dipak Misra",
+      "ans": 3,
+      "ch1": 253,
+      "ch2": 256,
+      "ch3": 758
+    },
+    {
+      "id": 10,
+      "q": "Which player has made highest numbers of runs in IPL history?",
+      "op1": "Chris Gayle",
+      "op2": "Suresh Raina",
+      "op3": "Virat Kohli",
+      "ans": 2,
+      "ch1": 311,
+      "ch2": 624,
+      "ch3": 203
+    }
+  ]
+}
