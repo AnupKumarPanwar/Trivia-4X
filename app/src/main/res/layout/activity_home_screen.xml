@@ -81,13 +81,24 @@
                 android:orientation="vertical"
                 android:layout_weight="3">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                    <!--android:id="@+id/profile_image"-->
+                    <!--android:layout_width="60dp"-->
+                    <!--android:layout_height="60dp"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:src="@drawable/profile"-->
+                    <!--app:civ_border_color="#FF000000" />-->
+                <TextView
                     android:id="@+id/profile_image"
                     android:layout_width="60dp"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textSize="30dp"
                     android:layout_height="60dp"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/profile"
-                    app:civ_border_color="#FF000000" />
+                    android:background="@drawable/button_bg_rounded_corners"/>
 
                 <TextView
                     android:id="@+id/username_holder"
@@ -149,7 +160,7 @@
                         android:id="@+id/lives_holder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="__"
+                        android:text="___"
                         android:textColor="#353999"
                         android:textSize="20dp"
                         android:textStyle="bold"/>

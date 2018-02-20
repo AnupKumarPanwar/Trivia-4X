@@ -24,6 +24,7 @@ import com.anthonycr.progress.AnimatedProgressBar;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class QuizActivity extends AppCompatActivity {
     Button op1, op2, op3, a_op1, a_op2, a_op3 ;
     int progressNum=10;
 
-    TextView countDown, question, ans1, ans2, ans3, ch1, ch2, ch3, warningMsg;
+    TextView countDown, question, ans1, ans2, ans3, ch1, ch2, ch3, warningMsg, starter;
 
     LinearLayout container, ansContainer, chContainer;
 
@@ -78,6 +79,8 @@ public class QuizActivity extends AppCompatActivity {
 
     String username;
 
+    int hours, minutes, seconds;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +88,8 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
 
-        StrictMode.ThreadPolicy threadPolicy=new StrictMode.ThreadPolicy.Builder().build();
-        StrictMode.setThreadPolicy(threadPolicy);
+//        StrictMode.ThreadPolicy threadPolicy=new StrictMode.ThreadPolicy.Builder().build();
+//        StrictMode.setThreadPolicy(threadPolicy);
 
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=sharedPreferences.edit();
@@ -118,6 +121,7 @@ public class QuizActivity extends AppCompatActivity {
         warningMsg=(TextView)findViewById(R.id.warning_msg);
         countDown=(TextView)findViewById(R.id.count_down);
         question=(TextView)findViewById(R.id.question);
+        starter=(TextView)findViewById(R.id.starter);
 
         ans1=(TextView)findViewById(R.id.ans_op1);
         ans2=(TextView)findViewById(R.id.ans_op2);
@@ -146,6 +150,50 @@ public class QuizActivity extends AppCompatActivity {
         a_op1.setVisibility(View.GONE);
         a_op2.setVisibility(View.GONE);
         a_op3.setVisibility(View.GONE);
+
+
+
+        hours=new Time(System.currentTimeMillis()).getHours();
+        minutes=new Time(System.currentTimeMillis()).getMinutes();
+        seconds=new Time(System.currentTimeMillis()).getSeconds();
+
+
+//        final int minRemaining=16-minutes;
+//        final int secRemaining=59-seconds;
+
+        Runnable startCountDown=new Runnable() {
+            @Override
+            public void run() {
+                minutes=new Time(System.currentTimeMillis()).getMinutes();
+                seconds=new Time(System.currentTimeMillis()).getSeconds();
+
+
+                int minRemaining=16-minutes;
+                int secRemaining=59-seconds;
+
+                if (secRemaining>=10) {
+                    starter.setText("0" + String.valueOf(minRemaining) + " : " + secRemaining);
+                }
+                else
+                {
+                    starter.setText("0" + String.valueOf(minRemaining) + " : 0" + secRemaining);
+                }
+
+                if (minRemaining>=0)
+                {
+                    handler.postDelayed(this, 1000);
+                }
+                else
+                {
+                    starter.setVisibility(View.GONE);
+                    JSONAsyncTask getData = new JSONAsyncTask();
+                    getData.execute();
+                }
+            }
+        };
+
+        handler.postDelayed(startCountDown, 1000);
+
 
         op1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,7 +248,7 @@ public class QuizActivity extends AppCompatActivity {
                     progressBar.setProgress(100 - progressNum);
                     countDown.setText(String.valueOf((100 - progressNum) / 10));
                     progressNum += 10;
-                    handler.postDelayed(this, 100);
+                    handler.postDelayed(this, 800);
                 }
                 else
                 {
@@ -209,7 +257,7 @@ public class QuizActivity extends AppCompatActivity {
                             .setInterpolator(new AccelerateInterpolator())
                             .setDuration(250);
 
-                    handler.postDelayed(showAnsRunnable, 700);
+                    handler.postDelayed(showAnsRunnable, 5000);
                 }
             }
         };
@@ -255,8 +303,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         };
 
-        JSONAsyncTask getData = new JSONAsyncTask();
-        getData.execute();
+
 
     }
 
@@ -365,7 +412,7 @@ public class QuizActivity extends AppCompatActivity {
         ansContainer.setVisibility(View.GONE);
         chContainer.setVisibility(View.GONE);
 
-        handler.postDelayed(runnable, 125);
+        handler.postDelayed(runnable, 1250);
 
         if (question_no>=0) {
             showContainer();
@@ -488,7 +535,7 @@ public class QuizActivity extends AppCompatActivity {
                 .setInterpolator(new AccelerateInterpolator())
                 .setDuration(250);
 
-        handler.postDelayed(hideContainerRunnable, 500);
+        handler.postDelayed(hideContainerRunnable, 5000);
 
     }
 
@@ -512,7 +559,7 @@ public class QuizActivity extends AppCompatActivity {
         ansContainer.setVisibility(View.GONE);
         chContainer.setVisibility(View.GONE);
 
-        handler.postDelayed(nextQuestionRunnable, 500);
+        handler.postDelayed(nextQuestionRunnable, 5000);
     }
 
     void showContainer()

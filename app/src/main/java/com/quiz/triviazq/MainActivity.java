@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.onesignal.OneSignal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        OneSignal.startInit(this).init();
         setContentView(R.layout.activity_main);
 
         Window window = this.getWindow();
@@ -40,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
 // finally change the color
         window.setStatusBarColor(Color.parseColor("#36399a"));
+
+//        StrictMode.ThreadPolicy threadPolicy=new StrictMode.ThreadPolicy.Builder().build();
+//        StrictMode.setThreadPolicy(threadPolicy);
 
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         username=sharedPreferences.getString("username", null);

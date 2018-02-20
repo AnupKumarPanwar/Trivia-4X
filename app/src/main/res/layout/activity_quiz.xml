@@ -31,6 +31,8 @@
         android:layout_height="50dp"
         android:layout_centerInParent="true"/>
 
+
+
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="360dp"
@@ -270,5 +272,19 @@
             android:id="@+id/ch3"/>
 
     </LinearLayout>
+
+    <TextView
+        android:textStyle="bold"
+        android:padding="30dp"
+        android:id="@+id/starter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/card_view"
+        android:textColor="#ff0000"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text=""
+        android:textSize="40dp"/>
 
 </RelativeLayout>

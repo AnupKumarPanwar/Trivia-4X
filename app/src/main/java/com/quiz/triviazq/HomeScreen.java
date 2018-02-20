@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.onesignal.OneSignal;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +30,7 @@ public class HomeScreen extends AppCompatActivity {
 
     Button playButton, invite, gml, leaderboard;
 
-    TextView nextGame, gameReward, usernameHolder, balanceHOlder, livesHolder;
+    TextView nextGame, gameReward, usernameHolder, balanceHOlder, livesHolder, unfChar;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -37,30 +40,43 @@ public class HomeScreen extends AppCompatActivity {
 
     int hours, minutes;
 
-    String baseUrl="http://192.168.4.145/HQ/";
+    String baseUrl="https://triviazq.000webhostapp.com/";
     String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        OneSignal.startInit(this).init();
         setContentView(R.layout.activity_home_screen);
 
 
-
+//        StrictMode.ThreadPolicy threadPolicy=new StrictMode.ThreadPolicy.Builder().build();
+//        StrictMode.setThreadPolicy(threadPolicy);
 
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=sharedPreferences.edit();
 
         referral_code=sharedPreferences.getString("username",null);
         username=sharedPreferences.getString("username",null);
+//        username="AnupKumar";
 
         nextGame=(TextView)findViewById(R.id.tv2);
         gameReward=(TextView)findViewById(R.id.tv3);
         usernameHolder=(TextView)findViewById(R.id.username_holder);
         balanceHOlder=(TextView)findViewById(R.id.balance_holder);
         livesHolder=(TextView)findViewById(R.id.lives_holder);
+        unfChar=(TextView)findViewById(R.id.profile_image);
+
 
         usernameHolder.setText(username);
+
+        try {
+            unfChar.setText(String.valueOf(username.toUpperCase().charAt(0)));
+        }
+        catch (Exception E)
+        {
+
+        }
 
         playButton=(Button)findViewById(R.id.play_button);
         gml=(Button)findViewById(R.id.gml);

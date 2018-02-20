@@ -4,11 +4,14 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.quiz.triviazq"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [onesignal_app_id: "33bef49c-7386-477a-8ac0-e1d7c4bf9633",
+                                // Project number pulled from dashboard, local value is ignored.
+                                onesignal_google_project_number: "REMOTE"]
     }
     buildTypes {
         release {
@@ -25,11 +28,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.anthonycr.progress:animated-progress:1.0'
     compile 'com.squareup.okhttp3:okhttp:3.9.1'
-    compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-auth:11.8.0'
+    compile 'com.onesignal:OneSignal:3.5.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

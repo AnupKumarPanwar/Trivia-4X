@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -54,7 +55,7 @@ public class CreateProfile extends AppCompatActivity {
     ProgressBar isVerifying;
 
     JSONObject jsonObject;
-    String baseUrl="http://192.168.4.145/HQ/";
+    String baseUrl="https://triviazq.000webhostapp.com/";
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -76,6 +77,8 @@ public class CreateProfile extends AppCompatActivity {
 // finally change the color
         window.setStatusBarColor(Color.parseColor("#36399a"));
 
+//        StrictMode.ThreadPolicy threadPolicy=new StrictMode.ThreadPolicy.Builder().build();
+//        StrictMode.setThreadPolicy(threadPolicy);
 
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=sharedPreferences.edit();
@@ -104,7 +107,7 @@ public class CreateProfile extends AppCompatActivity {
             public void onVerificationFailed(FirebaseException e) {
                 // This callback is invoked in an invalid request for verification is made,
                 // for instance if the the phone number format is not valid.
-//                Toast.makeText(getApplicationContext(), "Verification Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 
 //                if (e instanceof FirebaseAuthInvalidCredentialsException) {
 //                    // Invalid request
@@ -129,7 +132,7 @@ public class CreateProfile extends AppCompatActivity {
                 mVerificationId = verificationId;
                 mResendToken = token;
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, String.valueOf(mResendToken));
-
+                signInWithPhoneAuthCredential(credential);
                 // ...
             }
         };
@@ -156,10 +159,10 @@ public class CreateProfile extends AppCompatActivity {
     void sendOTP(String num)
     {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                num,        // Phone number to verify
+                num,            // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
-                this,               // Activity (for callback binding)
+                CreateProfile.this,               // Activity (for callback binding)
                 mCallbacks);        // OnVerificationStateChangedCallbacks
 
     }
@@ -178,6 +181,9 @@ public class CreateProfile extends AppCompatActivity {
 //                            Intent intent=new Intent(getApplicationContext(), HomeScreen.class);
 //                            startActivity(intent);
 //                            finish();
+                            conti.setEnabled(false);
+                            conti.setText("Verifying...");
+                            isVerifying.setVisibility(View.VISIBLE);
                             editor.putString("phone", phoneNo);
                             editor.apply();
                             JSONAsyncTask getData = new JSONAsyncTask();
@@ -187,12 +193,12 @@ public class CreateProfile extends AppCompatActivity {
                             // Sign in failed, display a message and update the UI
                             Toast.makeText(getApplicationContext(), "Verification failed", Toast.LENGTH_SHORT).show();
 
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+//                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
                                 conti.setEnabled(true);
                                 conti.setText("Continue");
                                 isVerifying.setVisibility(View.GONE);
-                            }
+//                            }
                         }
                     }
                 });
