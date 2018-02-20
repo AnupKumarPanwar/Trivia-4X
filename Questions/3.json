@@ -1,0 +1,115 @@
+{
+  "reward": "24",
+  "data": [
+    {
+      "id": 1,
+      "q": "Which team has never won the IPL tournament?",
+      "op1": "Rajasthan Royals",
+      "op2": "Deccan Chargers",
+      "op3": "Royal Challengers Bangalore",
+      "ans": 3,
+      "ch1": 3514,
+      "ch2": 2295,
+      "ch3": 12435
+    },
+    {
+      "id": 2,
+      "q": "Maximum how many foreign players can play in the playing eleven of the IPL match?",
+      "op1": "3",
+      "op2": "4",
+      "op3": "5",
+      "ans": 2,
+      "ch1": 1411,
+      "ch2": 8452,
+      "ch3": 3652
+    },
+    {
+      "id": 3,
+      "q": "What is the distance between 2 consecutive latitudes?",
+      "op1": "69 km",
+      "op2": "111 km",
+      "op3": "150 km",
+      "ans": 2,
+      "ch1": 1240,
+      "ch2": 6584,
+      "ch3": 798
+    },
+    {
+      "id": 4,
+      "q": "Which city is hosting the 2018 Kala Ghoda Arts festival?",
+      "op1": "New Delhi",
+      "op2": "Kolkata",
+      "op3": "Mumbai",
+      "ans": 3,
+      "ch1": 1541,
+      "ch2": 255,
+      "ch3": 5547
+    },
+    {
+      "id": 5,
+      "q": "The book “Exam Warriors” has been authored by which union minister?",
+      "op1": "Narendra Modi",
+      "op2": "Prakash Javadekar",
+      "op3": "Piyush Goyal",
+      "ans": 1,
+      "ch1": 4465,
+      "ch2": 2154,
+      "ch3": 542
+    },
+    {
+      "id": 6,
+      "q": "Which city is hosting the 2nd edition of Nobel Prize Series-India 2018?",
+      "op1": "Panaji",
+      "op2": "Chandigarh",
+      "op3": "Mysore",
+      "ans": 1,
+      "ch1": 2154,
+      "ch2": 1841,
+      "ch3": 1988
+    },
+    {
+      "id": 7,
+      "q": "Who among the following never received a Nobel Prize in Physics",
+      "op1": "Rainer Weiss",
+      "op2": "Richard Henderson",
+      "op3": "Richard Thaler",
+      "ans": 3,
+      "ch1": 1245,
+      "ch2": 1885,
+      "ch3": 1164
+    },
+    {
+      "id": 8,
+      "q": "The catch-line 'American dream, Indian soul' was of the film...?",
+      "op1": "Indian",
+      "op2": "Pardes",
+      "op3": "American Desi",
+      "ans": 2,
+      "ch1": 421,
+      "ch2": 1184,
+      "ch3": 1012
+    },
+    {
+      "id": 9,
+      "q": "Which was the first film in which Amitabh and Jaya Bachchan worked together?",
+      "op1": "Guddi",
+      "op2": "Piya Ka Ghar",
+      "op3": "Sholay",
+      "ans": 1,
+      "ch1": 552,
+      "ch2": 254,
+      "ch3": 747
+    },
+    {
+      "id": 10,
+      "q": "The only planet that shows phases is _________?",
+      "op1": "Moon",
+      "op2": "Venus",
+      "op3": "Saturn",
+      "ans": 2,
+      "ch1": 311,
+      "ch2": 526,
+      "ch3": 303
+    }
+  ]
+}
