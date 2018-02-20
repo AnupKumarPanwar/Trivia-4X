@@ -1,0 +1,115 @@
+{
+  "reward": "37",
+  "data": [
+    {
+      "id": 1,
+      "q": "Who was the first President of India?",
+      "op1": "Jawaharlal Nehru",
+      "op2": "Sarvepalli Radhakrishnan",
+      "op3": "Rajendra Prasad",
+      "ans": 3,
+      "ch1": 602,
+      "ch2": 195,
+      "ch3": 13035
+    },
+    {
+      "id": 2,
+      "q": "Which of the following is not an example of Operating System?",
+      "op1": "MS Office",
+      "op2": "Windows 98",
+      "op3": "Linux",
+      "ans": 1,
+      "ch1": 10232,
+      "ch2": 313,
+      "ch3": 2677
+    },
+    {
+      "id": 3,
+      "q": "Who among the following won Nobel Prize 2017 in Chemistry?",
+      "op1": "Joachim Frank",
+      "op2": "Kazuo Ishiguro",
+      "op3": "Barry Barish",
+      "ans": 1,
+      "ch1": 6512,
+      "ch2": 1151,
+      "ch3": 3115
+    },
+    {
+      "id": 4,
+      "q": "Who is the current defence minister of India?",
+      "op1": "Manohar Parrikar",
+      "op2": "Nirmala Sitharaman",
+      "op3": "Arun Jaitley",
+      "ans": 2,
+      "ch1": 1022,
+      "ch2": 5652,
+      "ch3": 423
+    },
+    {
+      "id": 5,
+      "q": "Who was the first Rajiv Gandhi Khel Ratna Award winner?",
+      "op1": "Karnam Malleswari",
+      "op2": "Sachin Tendulkar",
+      "op3": "Viswanathan Anand",
+      "ans": 3,
+      "ch1": 256,
+      "ch2": 2245,
+      "ch3": 2654
+    },
+    {
+      "id": 6,
+      "q": "Nuclear sizes are expressed in a unit named?",
+      "op1": "Fermi",
+      "op2": "Angstrom",
+      "op3": "Newton",
+      "ans": 1,
+      "ch1": 2085,
+      "ch2": 621,
+      "ch3": 143
+    },
+    {
+      "id": 7,
+      "q": "Which of the following start-ups has been recognized as the Startup of the Year 2017?",
+      "op1": "WishBerry",
+      "op2": "Milkbasket",
+      "op3": "9Stacks",
+      "ans": 2,
+      "ch1": 241,
+      "ch2": 1724,
+      "ch3": 116
+    },
+    {
+      "id": 8,
+      "q": "Which of the following rivers does not flow into the Arabian Sea?",
+      "op1": "Narmada",
+      "op2": "Sabarmati",
+      "op3": "Tungabhadra",
+      "ans": 3,
+      "ch1": 102,
+      "ch2": 195,
+      "ch3": 1532
+    },
+    {
+      "id": 9,
+      "q": "In which country Indian Independence Committee was formed during British Era?",
+      "op1": "England",
+      "op2": "Canada",
+      "op3": "Germany",
+      "ans": 3,
+      "ch1": 753,
+      "ch2": 156,
+      "ch3": 758
+    },
+    {
+      "id": 10,
+      "q": "Who will be the first female Hindu lawmaker in Pakistan since 1947?",
+      "op1": "Chandra Prabha",
+      "op2": "Krishna Kumari",
+      "op3": "Pallavi Lachhani",
+      "ans": 2,
+      "ch1": 211,
+      "ch2": 265,
+      "ch3": 203
+    }
+  ]
+}

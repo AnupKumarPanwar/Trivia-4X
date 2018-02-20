@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.quiz.triviazq.CreateProfile"
+    android:background="@drawable/login"
+    android:gravity="center">
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:id="@+id/profile_image"-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:src="@drawable/profile"-->
+    <!--app:civ_border_color="#FF000000"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginTop="100dp"/>-->
+
+
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:ems="13"
+        android:hint="Username"
+        android:background="@drawable/rounded_edittext"
+        android:paddingLeft="35dp"
+        android:layout_marginTop="120dp"/>
+
+
+    <EditText
+        android:id="@+id/referral"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:ems="13"
+        android:hint="Referral (optional)"
+        android:background="@drawable/rounded_edittext"
+        android:paddingLeft="35dp"
+        android:layout_below="@+id/username"
+        android:layout_marginTop="50dp"/>
+
+
+
+
+    <Button
+        android:id="@+id/conti"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="65dp"
+        android:background="@drawable/button_bg_rounded_corners"
+        android:text="Continue"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textAllCaps="false"/>
+
+    <ProgressBar
+        android:id="@+id/is_verifying"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignEnd="@+id/conti"
+        android:layout_alignRight="@+id/conti"
+        android:layout_alignTop="@+id/conti"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>
