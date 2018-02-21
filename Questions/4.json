@@ -1,0 +1,115 @@
+{
+  "reward": "19",
+  "data": [
+    {
+      "id": 1,
+      "q": "Who is the current governor of RBI?",
+      "op1": "Arun Jaitley",
+      "op2": "Raghuram Rajan",
+      "op3": "Urjit Patel",
+      "ans": 3,
+      "ch1": 514,
+      "ch2": 295,
+      "ch3": 15437
+    },
+    {
+      "id": 2,
+      "q": "Which country has recently declared to impose a ‘carbon tax’ from 2019 to cut its greenhouse gas emissions?",
+      "op1": "India",
+      "op2": "Singapore",
+      "op3": "Japan",
+      "ans": 2,
+      "ch1": 2411,
+      "ch2": 9457,
+      "ch3": 4652
+    },
+    {
+      "id": 3,
+      "q": "Which country has won the 5th Commonwealth bridge championship 2018?",
+      "op1": "China",
+      "op2": "India",
+      "op3": "Australia",
+      "ans": 2,
+      "ch1": 1240,
+      "ch2": 6584,
+      "ch3": 2198
+    },
+    {
+      "id": 4,
+      "q": "Adam Gilchrist is the author of which of the following books?",
+      "op1": "One Life is Not Enough",
+      "op2": "The God of Small Things",
+      "op3": "True Colours",
+      "ans": 3,
+      "ch1": 1547,
+      "ch2": 3355,
+      "ch3": 4549
+    },
+    {
+      "id": 5,
+      "q": "Who is the CEO of Flipkart",
+      "op1": "Sachin Bansal",
+      "op2": "Sriharsha Majety",
+      "op3": "Kalyan Krishnamurthy",
+      "ans": 3,
+      "ch1": 3541,
+      "ch2": 265,
+      "ch3": 1845
+    },
+    {
+      "id": 6,
+      "q": "Which of the following is the oldest company?",
+      "op1": "Yahoo",
+      "op2": "Google",
+      "op3": "Wikipedia",
+      "ans": 1,
+      "ch1": 1142,
+      "ch2": 1302,
+      "ch3": 848
+    },
+    {
+      "id": 7,
+      "q": "Whose birthday falls on Nov 19?",
+      "op1": "Narendra Modi",
+      "op2": "Sania Mirza",
+      "op3": "Shushmita Sen",
+      "ans": 3,
+      "ch1": 457,
+      "ch2": 352,
+      "ch3": 743
+    },
+    {
+      "id": 8,
+      "q": "What is the study of hearing called?",
+      "op1": "Acoustics",
+      "op2": "Audiology",
+      "op3": "Phonology",
+      "ans": 2,
+      "ch1": 221,
+      "ch2": 589,
+      "ch3": 112
+    },
+    {
+      "id": 9,
+      "q": "Where did India play its 1st one day international match?",
+      "op1": "Headingley",
+      "op2": "Lords",
+      "op3": "The Oval",
+      "ans": 1,
+      "ch1": 401,
+      "ch2": 512,
+      "ch3": 124
+    },
+    {
+      "id": 10,
+      "q": "Where is the headquarters of the Centre for Policy Research (CPR)?",
+      "op1": "Lucknow",
+      "op2": "New Delhi",
+      "op3": "Bhopal",
+      "ans": 2,
+      "ch1": 111,
+      "ch2": 416,
+      "ch3": 95
+    }
+  ]
+}
