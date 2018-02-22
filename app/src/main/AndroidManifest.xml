@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity"
+        <activity android:name="com.quiz.triviazq.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,16 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateProfile"
+        <activity android:name="com.quiz.triviazq.CreateProfile"
             android:screenOrientation="portrait"/>
-        <activity android:name=".HomeScreen"
+        <activity android:name="com.quiz.triviazq.HomeScreen"
             android:screenOrientation="portrait"/>
-        <activity android:name=".QuizActivity"
+        <activity android:name="com.quiz.triviazq.QuizActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ScoreCard"
+        <activity android:name="com.quiz.triviazq.ScoreCard"
             android:screenOrientation="portrait"/>
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".LeaderboardActivity"
+        <activity android:name="com.quiz.triviazq.SignupActivity" />
+        <activity android:name="com.quiz.triviazq.LeaderboardActivity"
             android:screenOrientation="portrait">
         </activity>
 
