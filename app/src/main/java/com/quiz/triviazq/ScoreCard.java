@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unity3d.ads.UnityAds;
+import com.unity3d.ads.unity.IUnityAdsUnityListener;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,11 +29,17 @@ public class ScoreCard extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     String referral_code;
+    String baseUrl="http://apniapi.com/anup/API/";
+
+    UnityAdsListener unityAdsListener=new UnityAdsListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_card);
+
+
+        UnityAds.initialize(this, "1714351", unityAdsListener);
 
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         referral_code=sharedPreferences.getString("username",null);
@@ -42,8 +51,8 @@ public class ScoreCard extends AppCompatActivity {
         congrats=(TextView)findViewById(R.id.congrats);
         share=(Button) findViewById(R.id.share);
 
-        eR=getIntent().getExtras().getInt("reward", 0);
         eS=getIntent().getExtras().getInt("score", 0);
+        eR=getIntent().getExtras().getInt("reward", 0);
 //        eR=0;
 //        eS=0;
 
@@ -66,7 +75,7 @@ public class ScoreCard extends AppCompatActivity {
             }
         });
 
-        reward.setText("₹ "+String.valueOf(eR));
+        reward.setText("$ "+String.valueOf(eR));
         score.setText(String.valueOf(eS)+"/10");
         if (eS!=10)
         {
@@ -115,4 +124,37 @@ public class ScoreCard extends AppCompatActivity {
         }
         return bmpUri;
     }
+
+    private class UnityAdsListener implements IUnityAdsUnityListener
+    {
+
+        @Override
+        public void onUnityAdsInitiatePurchase(String s) {
+
+        }
+
+        @Override
+        public void onUnityAdsReady(String s) {
+
+            UnityAds.show(ScoreCard.this);
+
+        }
+
+        @Override
+        public void onUnityAdsStart(String s) {
+
+        }
+
+        @Override
+        public void onUnityAdsFinish(String s, UnityAds.FinishState finishState) {
+            Intent intent=new Intent(getApplicationContext(), QuizActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
+        public void onUnityAdsError(UnityAds.UnityAdsError unityAdsError, String s) {
+
+        }
+    }
+
 }

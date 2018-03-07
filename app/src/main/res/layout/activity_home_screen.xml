@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.quiz.triviazq.HomeScreen"
     android:background="@drawable/login"
     android:gravity="center">
 
@@ -51,159 +50,159 @@
         android:layout_marginTop="10dp"/>
 
     <!--<RelativeLayout-->
-        <!--android:layout_marginTop="30dp"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/tv3"-->
-        <!--android:gravity="center"-->
-        <!--android:background="@drawable/card_view"-->
-        <!--android:layout_centerHorizontal="true">-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/tv3"-->
+    <!--android:gravity="center"-->
+    <!--android:background="@drawable/card_view"-->
+    <!--android:layout_centerHorizontal="true">-->
 
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/play_button"
+        android:gravity="center"
+        android:background="@drawable/card_view"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:weightSum="8"
+        android:id="@+id/user_details">
 
         <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/play_button"
             android:gravity="center"
-            android:background="@drawable/card_view"
-            android:layout_centerHorizontal="true"
             android:orientation="vertical"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:weightSum="8"
-            android:id="@+id/user_details">
+            android:layout_weight="3">
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/profile_image"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:src="@drawable/profile"-->
+            <!--app:civ_border_color="#FF000000" />-->
+            <TextView
+                android:id="@+id/profile_image"
+                android:layout_width="60dp"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:text=""
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_bg_rounded_corners"/>
+
+            <TextView
+                android:id="@+id/username_holder"
+                android:text="AnupKumarPanwar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="#353999"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2"
+            android:layout_marginTop="20dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="vertical"
-                android:layout_weight="3">
-
-                <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
-                    <!--android:id="@+id/profile_image"-->
-                    <!--android:layout_width="60dp"-->
-                    <!--android:layout_height="60dp"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:src="@drawable/profile"-->
-                    <!--app:civ_border_color="#FF000000" />-->
-                <TextView
-                    android:id="@+id/profile_image"
-                    android:layout_width="60dp"
-                    android:textColor="#fff"
-                    android:gravity="center"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textSize="30dp"
-                    android:layout_height="60dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/button_bg_rounded_corners"/>
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content">
 
                 <TextView
-                    android:id="@+id/username_holder"
-                    android:text="AnupKumarPanwar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:text="BALANCE"/>
+
+                <TextView
+                    android:id="@+id/balance_holder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$ ___"
                     android:textColor="#353999"
                     android:textSize="20dp"
                     android:textStyle="bold" />
-
             </LinearLayout>
 
             <LinearLayout
-
-                android:layout_weight="3"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:weightSum="2"
-                android:layout_marginTop="20dp">
+                android:layout_weight="1"
+                android:layout_width="wrap_content">
 
-                <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="BALANCE"/>
-
-                    <TextView
-                        android:id="@+id/balance_holder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="₹ ___"
-                        android:textColor="#353999"
-                        android:textSize="20dp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="LIVES"/>
-
-                    <TextView
-                        android:id="@+id/lives_holder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="___"
-                        android:textColor="#353999"
-                        android:textSize="20dp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:weightSum="6"
-                android:layout_marginTop="20dp"
-                android:layout_weight="2"
-                android:padding="10dp">
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="EXTRA LIVES"-->
-                    <!--android:layout_weight="2"-->
-                    <!--android:gravity="center"/>-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="20dp"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:background="@drawable/heart"-->
-                    <!--android:layout_weight="2"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="5"-->
-                    <!--android:textColor="#fff"-->
-                    <!--android:textStyle="bold"/>-->
-
-                <Button
-                    android:id="@+id/gml"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:text="Get More Lives"
-                    android:background="@drawable/rounded_button"/>
+                    android:text="LIVES"/>
+
+                <TextView
+                    android:id="@+id/lives_holder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="___"
+                    android:textColor="#353999"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
             </LinearLayout>
-
-
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:weightSum="6"
+            android:layout_marginTop="20dp"
+            android:layout_weight="2"
+            android:padding="10dp">
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="EXTRA LIVES"-->
+            <!--android:layout_weight="2"-->
+            <!--android:gravity="center"/>-->
+
+            <!--<TextView-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:background="@drawable/heart"-->
+            <!--android:layout_weight="2"-->
+            <!--android:gravity="center"-->
+            <!--android:text="5"-->
+            <!--android:textColor="#fff"-->
+            <!--android:textStyle="bold"/>-->
+
+            <Button
+                android:id="@+id/gml"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Get More Lives"
+                android:background="@drawable/rounded_button"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
     <!--</RelativeLayout>-->

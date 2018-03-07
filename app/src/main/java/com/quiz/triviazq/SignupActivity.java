@@ -23,16 +23,16 @@ import okhttp3.Response;
 
 public class SignupActivity extends AppCompatActivity {
 
-    EditText username,referral;
+    EditText username,referral, email;
     Button conti;
     ProgressBar isVerifying;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-    String val_username, val_referral, phoneNo;
+    String val_username, val_referral, phoneNo, val_email;
     JSONObject jsonObject;
 
-    String baseUrl="https://triviazq.000webhostapp.com/";
+    String baseUrl="http://apniapi.com/anup/API/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class SignupActivity extends AppCompatActivity {
 
         username=(EditText) findViewById(R.id.username);
         referral=(EditText) findViewById(R.id.referral);
+        email=(EditText) findViewById(R.id.email);
 
         conti=(Button)findViewById(R.id.conti);
 
@@ -61,19 +62,22 @@ public class SignupActivity extends AppCompatActivity {
 //                phoneNo=edit
                 val_username=username.getText().toString();
                 val_referral=referral.getText().toString();
+                val_email=email.getText().toString();
 
-                if (!TextUtils.isEmpty(val_username)) {
+                if (!TextUtils.isEmpty(val_username) && !TextUtils.isEmpty(val_email))
+                {
 
-                    if (val_referral == null) {
-                        val_referral = "";
-                    }
 
-                    conti.setEnabled(false);
-                    conti.setText("Signing up...");
-                    isVerifying.setVisibility(View.VISIBLE);
+                        if (val_referral == null) {
+                            val_referral = "";
+                        }
 
-                    JSONAsyncTask jsonAsyncTask = new JSONAsyncTask();
-                    jsonAsyncTask.execute();
+                        conti.setEnabled(false);
+                        conti.setText("Signing up...");
+                        isVerifying.setVisibility(View.VISIBLE);
+
+                        JSONAsyncTask jsonAsyncTask = new JSONAsyncTask();
+                        jsonAsyncTask.execute();
                 }
             }
         });
@@ -97,6 +101,7 @@ public class SignupActivity extends AppCompatActivity {
                     .addFormDataPart("phone", phoneNo)
                     .addFormDataPart("username", val_username)
                     .addFormDataPart("referral", val_referral)
+                    .addFormDataPart("email", val_email)
                     .build();
 
             Request request = new Request.Builder()

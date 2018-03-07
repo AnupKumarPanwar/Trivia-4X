@@ -1,5 +1,6 @@
 package com.quiz.triviazq;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
     LinearLayout container;
     JSONObject jsonObject;
-    String baseUrl="https://triviazq.000webhostapp.com/";
+    String baseUrl="http://apniapi.com/anup/API/";
 
     JSONArray jsonArray;
 
@@ -42,6 +43,13 @@ public class LeaderboardActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        Intent intent=new Intent(getApplicationContext(), HomeScreen.class);
+        startActivity(intent);
+        finish();
+    }
 
     class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
 
@@ -107,7 +115,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
                         TextView balance=new TextView(getApplicationContext());
                         balance.setTextColor(Color.BLACK);
-                        balance.setText("₹ "+jsonArray.getJSONObject(i).getString("balance"));
+                        balance.setText("$ "+jsonArray.getJSONObject(i).getString("balance"));
                         balance.setTextSize(20);
                         balance.setWidth(2*container.getWidth()/7);
 //                        balance.setGravity(Gravity.CENTER);

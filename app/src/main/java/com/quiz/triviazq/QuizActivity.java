@@ -24,8 +24,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.Time;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -72,11 +75,13 @@ public class QuizActivity extends AppCompatActivity {
 
     SharedPreferences.Editor editor;
 
-    String baseUrl="http://192.168.4.145/HQ/";
+    String baseUrl="http://apniapi.com/anup/API/";
+//String baseUrl="http://192.168.4.145/US/";
+
 
     JSONObject jsonObject, jsonObject2;
 
-    String username;
+    String username, qUrl;
 
     int hours, minutes, seconds;
 
@@ -152,22 +157,48 @@ public class QuizActivity extends AppCompatActivity {
 
 
 
-        hours=new Time(System.currentTimeMillis()).getHours();
-        minutes=new Time(System.currentTimeMillis()).getMinutes();
-        seconds=new Time(System.currentTimeMillis()).getSeconds();
-
 
 //        final int minRemaining=16-minutes;
 //        final int secRemaining=59-seconds;
+        final DateFormat df = DateFormat.getTimeInstance();
+        df.setTimeZone(TimeZone.getTimeZone("gmt"));
+
+        String gmtTime2 = df.format(new Date());
+
+        String[] times2=gmtTime2.split(":");
+
+        hours=Integer.parseInt(times2[0]);
+
+        if (hours==12 || hours==1)
+        {
+            qUrl="https://www.jasonbase.com/things/64MD.json";
+        }
+        else
+        {
+            qUrl="https://www.jasonbase.com/things/WxGP.json";
+        }
+
+        JSONAsyncTask getData = new JSONAsyncTask();
+        getData.execute();
 
         Runnable startCountDown=new Runnable() {
             @Override
             public void run() {
-                minutes=new Time(System.currentTimeMillis()).getMinutes();
-                seconds=new Time(System.currentTimeMillis()).getSeconds();
+                String gmtTime = df.format(new Date());
 
+                String[] times=gmtTime.split(":");
+                minutes=Integer.parseInt(times[1]);
+                seconds=Integer.parseInt(times[2].substring(0, 2));
 
-                int minRemaining=16-minutes;
+                int minRemaining;
+                if (minutes>50)
+                {
+                    minRemaining=61-minutes;
+                }
+                else
+                {
+                    minRemaining=1-minutes;
+                }
                 int secRemaining=59-seconds;
 
                 if (secRemaining>=10) {
@@ -185,8 +216,14 @@ public class QuizActivity extends AppCompatActivity {
                 else
                 {
                     starter.setVisibility(View.GONE);
-                    JSONAsyncTask getData = new JSONAsyncTask();
-                    getData.execute();
+
+                    if (questionList.size()>0) {
+                        startQuiz();
+                    }
+                    else {
+                        warningMsg.setText("Unable to connect!");
+                        warningContainer.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         };
@@ -282,7 +319,7 @@ public class QuizActivity extends AppCompatActivity {
         nextQuestionRunnable=new Runnable() {
             @Override
             public void run() {
-                if (question_no<questionList.size()-1) {
+                if (question_no<(questionList.size()-1)) {
                     question_no++;
                     updateQuestion(question_no);
                 }
@@ -292,21 +329,32 @@ public class QuizActivity extends AppCompatActivity {
                         JSONAsyncTask3 getData = new JSONAsyncTask3();
                         getData.execute();
                     }
-
-                    Intent intent=new Intent(getApplicationContext(), ScoreCard.class);
-                    intent.putExtra("score", score);
-                    intent.putExtra("reward", reward);
-                    startActivity(intent);
-                    finish();
+                    else {
+                        Intent intent = new Intent(getApplicationContext(), ScoreCard.class);
+                        intent.putExtra("score", score);
+                        intent.putExtra("reward", reward);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         };
 
 
 
+
+
+
+
     }
 
 
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(getApplicationContext(), HomeScreen.class);
+        startActivity(intent);
+        finish();
+    }
 
     class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
 
@@ -320,7 +368,7 @@ public class QuizActivity extends AppCompatActivity {
         protected Boolean doInBackground(String... strings) {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("https://www.jasonbase.com/things/JoDb.json")
+                    .url(qUrl)
                     .build();
 
 
@@ -358,13 +406,7 @@ public class QuizActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Boolean result) {
-            if (questionList.size()>0) {
-                startQuiz();
-            }
-            else {
-                warningMsg.setText("Unable to connect!");
-                warningContainer.setVisibility(View.VISIBLE);
-            }
+
         }
     }
 
@@ -451,7 +493,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if (p2<60)
         {
-           p2 = 60;
+            p2 = 60;
         }
 
         if (p3<60)
@@ -667,7 +709,11 @@ public class QuizActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Boolean result) {
-
+            Intent intent = new Intent(getApplicationContext(), ScoreCard.class);
+            intent.putExtra("score", score);
+            intent.putExtra("reward", reward);
+            startActivity(intent);
+            finish();
         }
     }
 

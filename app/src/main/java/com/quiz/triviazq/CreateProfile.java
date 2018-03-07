@@ -52,7 +52,7 @@ public class CreateProfile extends AppCompatActivity {
     ProgressBar isVerifying;
 
     JSONObject jsonObject;
-    String baseUrl="https://triviazq.000webhostapp.com/";
+    String baseUrl="http://apniapi.com/anup/API/";
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -141,7 +141,7 @@ public class CreateProfile extends AppCompatActivity {
         conti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                phoneNo="+91"+phoneText.getText().toString();
+                phoneNo=phoneText.getText().toString();
                 if (!TextUtils.isEmpty(phoneNo)) {
 //                Toast.makeText(getApplicationContext(), phoneNo, Toast.LENGTH_SHORT).show();
                     sendOTP(phoneNo);

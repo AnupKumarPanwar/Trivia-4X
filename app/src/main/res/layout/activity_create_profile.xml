@@ -26,19 +26,19 @@
         android:layout_centerHorizontal="true"
         android:ems="13"
         android:inputType="phone"
-        android:hint="Phone"
+        android:hint="Phone (+919876543210)"
         android:background="@drawable/rounded_edittext"
-        android:paddingLeft="50dp"
+        android:paddingLeft="25dp"
         android:layout_centerVertical="true"/>
 
-    <TextView
-        android:layout_alignLeft="@+id/phone"
-        android:paddingLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="+91"
-        android:gravity="center"
-        android:layout_centerVertical="true"/>
+    <!--<TextView-->
+        <!--android:layout_alignLeft="@+id/phone"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:text="+91"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_centerVertical="true"/>-->
 
     <!--<EditText-->
         <!--android:id="@+id/username"-->
@@ -104,6 +104,6 @@
         android:layout_marginBottom="81dp"
         android:textColor="#fff"
         android:textSize="15dp"
-        android:text="Enter phone number linked with Paytm" />
+        android:text="Enter phone number with country code" />
 
 </RelativeLayout>

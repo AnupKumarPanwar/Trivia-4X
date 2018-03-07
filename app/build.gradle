@@ -6,8 +6,8 @@ android {
         applicationId "com.quiz.triviazq"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 7
+        versionName "1.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [onesignal_app_id: "33bef49c-7386-477a-8ac0-e1d7c4bf9633",
                                 // Project number pulled from dashboard, local value is ignored.
@@ -18,6 +18,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
     }
 }
 
@@ -32,6 +38,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.9.1'
     compile 'com.google.firebase:firebase-auth:11.8.0'
     compile 'com.onesignal:OneSignal:3.5.3'
+    compile(name:'unity-ads', ext:'aar')
 }
 
 apply plugin: 'com.google.gms.google-services'

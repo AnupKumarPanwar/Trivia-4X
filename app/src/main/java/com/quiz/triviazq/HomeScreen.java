@@ -3,6 +3,7 @@ package com.quiz.triviazq;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.onesignal.OneSignal;
+import com.unity3d.ads.UnityAds;
+import com.unity3d.ads.unity.IUnityAdsUnityListener;
 
 import org.json.JSONObject;
 
 import java.sql.Time;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -35,10 +41,14 @@ public class HomeScreen extends AppCompatActivity {
     String referral_code;
     JSONObject jsonObject, jsonObject2;
 
-    int hours, minutes;
+    int hours, minutes, seconds;
 
-    String baseUrl="https://triviazq.000webhostapp.com/";
+    Handler handler;
+
+    String baseUrl="http://apniapi.com/anup/API/";
     String username;
+
+    UnityAdsListener unityAdsListener=new UnityAdsListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +56,12 @@ public class HomeScreen extends AppCompatActivity {
         OneSignal.startInit(this).init();
         setContentView(R.layout.activity_home_screen);
 
+        UnityAds.initialize(this, "1714351", unityAdsListener);
 
 //        StrictMode.ThreadPolicy threadPolicy=new StrictMode.ThreadPolicy.Builder().build();
 //        StrictMode.setThreadPolicy(threadPolicy);
 
+        handler=new Handler();
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=sharedPreferences.edit();
 
@@ -82,57 +94,131 @@ public class HomeScreen extends AppCompatActivity {
 
 
 
-        hours=new Time(System.currentTimeMillis()).getHours();
-        minutes=new Time(System.currentTimeMillis()).getMinutes();
+//        hours=new Time(System.currentTimeMillis()).getHours();
+//        minutes=new Time(System.currentTimeMillis()).getMinutes();
+//
+//        if (hours<=17)
+//        {
+//            if (hours==17)
+//            {
+//                if (minutes<=15)
+//                {
+//                    nextGame.setText("Today, 5:15 PM");
+//                    gameReward.setText("Rs. 10000 prize");
+//                }
+//                else
+//                {
+//                    nextGame.setText("Today, 7:15 PM");
+//                    gameReward.setText("Rs. 15000 prize");
+//                }
+//            }
+//            else
+//            {
+//                nextGame.setText("Today, 5:15 PM");
+//                gameReward.setText("Rs. 10000 prize");
+//            }
+//
+//        }
+//        else if (hours<=19)
+//        {
+//            if (hours==19)
+//            {
+//                if (minutes<=30)
+//                {
+//                    nextGame.setText("Today, 7:15 PM");
+//                    gameReward.setText("Rs. 15000 prize");
+//                }
+//                else
+//                {
+//                    nextGame.setText("Tomorrow, 5:15 PM");
+//                    gameReward.setText("Rs. 10000 prize");
+//                }
+//            }
+//            else
+//            {
+//                nextGame.setText("Today, 7:15 PM");
+//                gameReward.setText("Rs. 15000 prize");
+//            }
+//        }
+//        else
+//        {
+//            nextGame.setText("Tomorrow, 5:15 PM");
+//            gameReward.setText("Rs. 10000 prize");
+//        }
 
-        if (hours<17)
-        {
-            if (hours==17)
-            {
-                if (minutes<=15)
-                {
-                    nextGame.setText("Today, 5:15 PM");
-                    gameReward.setText("Rs. 10000 prize");
+
+
+        final DateFormat df = DateFormat.getTimeInstance();
+        df.setTimeZone(TimeZone.getTimeZone("gmt"));
+
+        Runnable getQuizCountDown=new Runnable() {
+            @Override
+            public void run() {
+                String gmtTime = df.format(new Date());
+
+                String[] times=gmtTime.split(":");
+                hours=Integer.parseInt(times[0]);
+                minutes=Integer.parseInt(times[1]);
+                seconds=Integer.parseInt(times[2].substring(0, 2));
+
+//                Toast.makeText(getApplicationContext(),String.valueOf(times[2].charAt(times[2].length()-2)), Toast.LENGTH_SHORT).show();
+
+                if (hours!=12) {
+                    if ((times[2].charAt(times[2].length() - 2) == 'P') || (times[2].charAt(times[2].length() - 2) == 'p')) {
+                        hours -= 12;
+                    }
                 }
+
+
+                int remHrs=12-hours;
+                int remMin=59-minutes;
+                int remSec=59-seconds;
+
+                String showRemHrs=String.valueOf(remHrs);
+                String showRemMin=String.valueOf(remMin);
+                String showRemSec=String.valueOf(remSec);
+
+                if (showRemHrs.length()==1)
+                {
+                    showRemHrs="0"+showRemHrs;
+                }
+
+                if (showRemMin.length()==1)
+                {
+                    showRemMin="0"+showRemMin;
+                }
+
+                if (showRemSec.length()==1)
+                {
+                    showRemSec="0"+showRemSec;
+                }
+
+                if (remHrs==23)
+                {
+                    nextGame.setText("01" + " : " + showRemMin + " : " + showRemSec);
+                    gameReward.setText("$ 4000 prize");
+                }
+                else if (remHrs==22)
+                {
+                    nextGame.setText("00" + " : " + showRemMin + " : " + showRemSec);
+                    gameReward.setText("$ 4000 prize");
+                }
+
                 else
                 {
-                    nextGame.setText("Today, 7:15 PM");
-                    gameReward.setText("Rs. 15000 prize");
+                    nextGame.setText(showRemHrs + " : " + showRemMin + " : " + showRemSec);
+                    gameReward.setText("$ 4000 prize");
                 }
-            }
-            else
-            {
-                nextGame.setText("Today, 5:15 PM");
-                gameReward.setText("Rs. 10000 prize");
-            }
 
-        }
-        else if (hours<19)
-        {
-            if (hours==19)
-            {
-                if (minutes<=30)
-                {
-                    nextGame.setText("Today, 7:15 PM");
-                    gameReward.setText("Rs. 15000 prize");
-                }
-                else
-                {
-                    nextGame.setText("Tomorrow, 5:15 PM");
-                    gameReward.setText("Rs. 10000 prize");
-                }
+                handler.postDelayed(this, 1000);
             }
-            else
-            {
-                nextGame.setText("Today, 7:15 PM");
-                gameReward.setText("Rs. 15000 prize");
-            }
-        }
-        else
-        {
-            nextGame.setText("Tomorrow, 5:15 PM");
-            gameReward.setText("Rs. 10000 prize");
-        }
+        };
+
+
+
+        handler.postDelayed(getQuizCountDown,1);
+
+
 
 
         gml.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +245,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(), LeaderboardActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -191,8 +278,17 @@ public class HomeScreen extends AppCompatActivity {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(), QuizActivity.class);
-                startActivity(intent);
+                playButton.setVisibility(View.INVISIBLE);
+
+                if (UnityAds.isReady())
+                {
+                    UnityAds.show(HomeScreen.this);
+                }
+                else
+                {
+                    Intent intent=new Intent(getApplicationContext(), QuizActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -301,7 +397,7 @@ public class HomeScreen extends AppCompatActivity {
                 if (jsonObject2.getJSONObject("result").getString("status").equals("1"))
                 {
 //                    playButton.setVisibility(View.VISIBLE);
-                    balanceHOlder.setText("₹ "+jsonObject2.getJSONObject("result").getString("balance"));
+                    balanceHOlder.setText("$ "+jsonObject2.getJSONObject("result").getString("balance"));
                     livesHolder.setText(jsonObject2.getJSONObject("result").getString("lives"));
 
                     editor.putString("lifes",jsonObject2.getJSONObject("result").getString("lives") );
@@ -318,5 +414,35 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    private class UnityAdsListener implements IUnityAdsUnityListener
+    {
+
+        @Override
+        public void onUnityAdsInitiatePurchase(String s) {
+
+        }
+
+        @Override
+        public void onUnityAdsReady(String s) {
+
+        }
+
+        @Override
+        public void onUnityAdsStart(String s) {
+
+        }
+
+        @Override
+        public void onUnityAdsFinish(String s, UnityAds.FinishState finishState) {
+            Intent intent=new Intent(getApplicationContext(), QuizActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
+        public void onUnityAdsError(UnityAds.UnityAdsError unityAdsError, String s) {
+
+        }
     }
 }
